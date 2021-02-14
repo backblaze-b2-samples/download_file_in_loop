@@ -153,6 +153,12 @@ class B2Connector:
         headers = {}
         headers['Authorization'] = self.authToken
 
+        # Adding a Range header for the first 10MB of a file, just in case
+        # this could be related.
+
+        if int(attempt_num) % 2 == 0:
+            headers['Range'] = 'bytes=0-9999999'
+
         session, req, res, timestamp = self.fetchUrl(url, 'GET', True,
                                                      headers=headers)
 

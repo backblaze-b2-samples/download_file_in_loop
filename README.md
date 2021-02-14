@@ -10,6 +10,11 @@ SHA1 from the B2 response AND the SHA1 of the downloaded file contents, request
 response information will be output to help troubleshoot why the hash does 
 not match.
 
+Every other request inserts an HTTP Range header (Range: bytes=0-9999999), in 
+case this could be related. 
+
+This script was written to attempt to debug the issue described here: https://github.com/restic/restic/issues/3268
+
 ## Pre-requisites
 This scripts requires: 
 
@@ -54,8 +59,8 @@ $ python start.py 5mb.bin 2e95d7582c53583fa8afb54e0fe7a2597c92cbba 2
 ```
 $ python start.py 5mb.bin not_the_hash_you_are_looking_for 2
 
-[Sun, 14 Feb 2021 20:33:44 GMT]: Starting downloads, 2 times
-[Attempt: 0]: Request made at Sun, 14 Feb 2021 20:33:44 GMT
+[Sun, 14 Feb 2021 20:50:58 GMT]: Starting downloads, 2 times
+[Attempt: 0]: Request made at Sun, 14 Feb 2021 20:50:58 GMT
 [Attempt: 0]: SHA1 do not match.
 [Attempt: 0]: expected_content_sha1: not_the_hash_you_are_looking_for
 [Attempt: 0]: b2_content_sha1: 2e95d7582c53583fa8afb54e0fe7a2597c92cbba
@@ -63,6 +68,7 @@ $ python start.py 5mb.bin not_the_hash_you_are_looking_for 2
 [Attempt: 0] REQUEST  **********
 GET https://f000.backblazeb2.com/file/nilayptmp/5mb.bin
 Authorization: [omitted]
+Range: bytes=0-9999999
 User-Agent: python-requests/2.25.1
 Accept-Encoding: gzip, deflate
 Accept: */*
@@ -79,9 +85,9 @@ Accept-Ranges: bytes
 x-bz-info-src_last_modified_millis: 1613328240000
 Content-Type: application/macbinary
 Content-Length: 5242880
-Date: Sun, 14 Feb 2021 20:33:43 GMT
+Date: Sun, 14 Feb 2021 20:50:58 GMT
 
-[Attempt: 1]: Request made at Sun, 14 Feb 2021 20:33:45 GMT
+[Attempt: 1]: Request made at Sun, 14 Feb 2021 20:50:59 GMT
 [Attempt: 1]: SHA1 do not match.
 [Attempt: 1]: expected_content_sha1: not_the_hash_you_are_looking_for
 [Attempt: 1]: b2_content_sha1: 2e95d7582c53583fa8afb54e0fe7a2597c92cbba
@@ -105,7 +111,7 @@ Accept-Ranges: bytes
 x-bz-info-src_last_modified_millis: 1613328240000
 Content-Type: application/macbinary
 Content-Length: 5242880
-Date: Sun, 14 Feb 2021 20:33:44 GMT
+Date: Sun, 14 Feb 2021 20:50:58 GMT
 
-[Sun, 14 Feb 2021 20:33:45 GMT]: End
+[Sun, 14 Feb 2021 20:51:00 GMT]: End
 ```
