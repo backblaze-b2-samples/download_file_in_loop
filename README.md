@@ -1,9 +1,9 @@
-# Download File B2API in Loop
+# Download file in a loop (using the Backblaze B2 API)
 
 This script takes three inputs on the command line:
 1. A B2 filepath
 2. The expected SHA1 hash for this file.
-3. The number of times the download should be requested.
+3. The number of times the file should be downloaded.
 
 For any download attempt where the SHA1 from the input does not match the 
 SHA1 from the B2 response AND the SHA1 of the downloaded file contents, request 
@@ -39,7 +39,7 @@ $ python start.py [filepath] [Sha1] [num of requests]
 ```
 
 ## Sample successful output
-```bash
+```
 [Sun, 14 Feb 2021 20:34:19 GMT]: Starting downloads, 2 times
 [Attempt: 0]: Request made at Sun, 14 Feb 2021 20:34:19 GMT
 [Attempt: 0]: All SHA1 match.
@@ -49,7 +49,7 @@ $ python start.py [filepath] [Sha1] [num of requests]
 ```
 
 ## Sample failed output
-```bash
+```
 [Sun, 14 Feb 2021 20:33:44 GMT]: Starting downloads, 2 times
 [Attempt: 0]: Request made at Sun, 14 Feb 2021 20:33:44 GMT
 [Attempt: 0]: SHA1 do not match.
