@@ -1,7 +1,7 @@
 # Download file in a loop (using the Backblaze B2 API)
 
 This script takes three inputs on the command line:
-1. A B2 filepath
+1. A B2 filename
 2. The expected SHA1 hash for this file.
 3. The number of times the file should be downloaded.
 
@@ -28,18 +28,20 @@ Configuration is stored in config.yaml.
 
 ```yaml
 bucketName : '[bucket name here]'
-keyid      : '[add keyId here]'
+keyid      : '[add keyid here]'
 appkey     : '[add appkey here]'
 apiVersion : '/b2api/v2/'
 ```
 
 ## Running the script
 ```bash
-$ python start.py [filepath] [Sha1] [num of requests] 
+$ python start.py [filename] [expected sha1] [num of requests] 
 ```
 
 ## Sample successful output
 ```
+$ python start.py 5mb.bin 2e95d7582c53583fa8afb54e0fe7a2597c92cbba 2
+
 [Sun, 14 Feb 2021 20:34:19 GMT]: Starting downloads, 2 times
 [Attempt: 0]: Request made at Sun, 14 Feb 2021 20:34:19 GMT
 [Attempt: 0]: All SHA1 match.
@@ -50,10 +52,12 @@ $ python start.py [filepath] [Sha1] [num of requests]
 
 ## Sample failed output
 ```
+$ python start.py 5mb.bin not_the_hash_you_are_looking_for 2
+
 [Sun, 14 Feb 2021 20:33:44 GMT]: Starting downloads, 2 times
 [Attempt: 0]: Request made at Sun, 14 Feb 2021 20:33:44 GMT
 [Attempt: 0]: SHA1 do not match.
-[Attempt: 0]: expected_content_sha1: 2e95d7582c53583fa8afb54e0fe7a2597c92cbbb
+[Attempt: 0]: expected_content_sha1: not_the_hash_you_are_looking_for
 [Attempt: 0]: b2_content_sha1: 2e95d7582c53583fa8afb54e0fe7a2597c92cbba
 [Attempt: 0]: res_content_sha1: 2e95d7582c53583fa8afb54e0fe7a2597c92cbba
 [Attempt: 0] REQUEST  **********
@@ -79,7 +83,7 @@ Date: Sun, 14 Feb 2021 20:33:43 GMT
 
 [Attempt: 1]: Request made at Sun, 14 Feb 2021 20:33:45 GMT
 [Attempt: 1]: SHA1 do not match.
-[Attempt: 1]: expected_content_sha1: 2e95d7582c53583fa8afb54e0fe7a2597c92cbbb
+[Attempt: 1]: expected_content_sha1: not_the_hash_you_are_looking_for
 [Attempt: 1]: b2_content_sha1: 2e95d7582c53583fa8afb54e0fe7a2597c92cbba
 [Attempt: 1]: res_content_sha1: 2e95d7582c53583fa8afb54e0fe7a2597c92cbba
 [Attempt: 1] REQUEST  **********
