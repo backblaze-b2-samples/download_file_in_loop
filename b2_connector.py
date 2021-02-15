@@ -170,7 +170,7 @@ class B2Connector:
             # 900 error indicates a RequestExeception.
 
             print ('[Attempt: %s]: Returned status code %s. Continuing.'
-                   % attempt_num, str(res.status_code))
+                   % (attempt_num, str(res.status_code)))
         else:
             # If 200, let's check the contents of the response SHA1 with the
             # SHA1 returned by B2 with the expected SHA1.
