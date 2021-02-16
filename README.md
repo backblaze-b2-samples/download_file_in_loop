@@ -40,12 +40,12 @@ apiVersion : '/b2api/v2/'
 
 ## Running the script
 ```bash
-$ python start.py [filename] [expected sha1] [num of requests] 
+$ python3 start.py [filename] [expected sha1] [num of requests] 
 ```
 
 ## Sample successful output
 ```
-$ python start.py 5mb.bin 2e95d7582c53583fa8afb54e0fe7a2597c92cbba 2
+$ python3 -u start.py 5mb.bin 2e95d7582c53583fa8afb54e0fe7a2597c92cbba 2
 
 [Sun, 14 Feb 2021 20:34:19 GMT]: Starting downloads, 2 times
 [Attempt: 0]: Request made at Sun, 14 Feb 2021 20:34:19 GMT
@@ -57,7 +57,7 @@ $ python start.py 5mb.bin 2e95d7582c53583fa8afb54e0fe7a2597c92cbba 2
 
 ## Sample failed output
 ```
-$ python start.py 5mb.bin not_the_hash_you_are_looking_for 2
+$ python3 -u start.py 5mb.bin not_the_hash_you_are_looking_for 2
 
 [Sun, 14 Feb 2021 20:50:58 GMT]: Starting downloads, 2 times
 [Attempt: 0]: Request made at Sun, 14 Feb 2021 20:50:58 GMT
